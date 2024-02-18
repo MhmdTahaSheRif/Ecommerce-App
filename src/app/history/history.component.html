@@ -1,0 +1,62 @@
+<main class="flex min-h-fit w-full">
+
+  <!-- Left column -->
+  <div class="flex flex-col w-full md:px-40 py-10 relative">
+
+    <div class="flex flex-grow h-full w-full justify-evenly lg:container lg:mx-auto ">
+      <div class="flex flex-col h-full w-3/4">
+        <div class="flex w-3/4 h-full" *ngIf="selectedItems?.length==0">
+          <!-- Content for empty cart -->
+          <div class="md:flex hidden w-2/3">
+            <img src="assets/jugs.png" style="height: 260px ;margin-top: 200px;" />
+          </div>
+          <div class="flex flex-col justify-evenly w-full h-full">
+            <div class="flex sm:justify-start justify-center items-center md:text-2xl text-lg h-1/2 w-200 ">
+              Your Amazon History is empty
+            </div>
+            <div class="flex justify-center items-start  h-1/2">
+              <button *ngIf="currentUser?.email==null"
+                class="bg-yellow-400 hover:bg-yellow-400 hover:scale-105 transition ease-in-out duration-500 p-1 rounded-md w-32">Sign
+                In </button>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="selectedItems.length>0" class="flex flex-col h-full w-3/4">
+
+          <div class="flex justify-start w-full md:text-3xl text-lg py-5">
+            History Items
+          </div>
+          <div *ngFor="let selectedItem of selectedItems" class="product-details py-5">
+            <h2 style="margin: auto;">{{ selectedItem.title }}</h2>
+            <img [src]="selectedItem.image" alt="Product Image" class="product-image h-2/3" style="margin: auto;">
+            <p><strong>Price:</strong> ${{ selectedItem.price }}</p>
+            <p><strong>Description:</strong> {{ selectedItem.description }}</p>
+            <p><strong>Category:</strong> {{ selectedItem.category }}</p>
+            <p><strong>Rating:</strong> {{ selectedItem.rating.rate }} ({{ selectedItem.rating.count }} reviews)</p>
+            <button (click)="addToCart(selectedItem)"
+              class="rounded-lg w-48 bg-yellow-300 hover:bg-yellow-400 text-center p-2 my-4  hover:shadow-2xl ease-in-out duration-700 hover:text-orange-600">
+              Add to Cart
+            </button><br>
+            <button (click)="removeFromSelectedItems(selectedItem)"
+              class="rounded-lg w-48 bg-yellow-300 hover:bg-yellow-400 text-center p-2 my-4  hover:shadow-2xl ease-in-out duration-700 hover:text-orange-600">
+              Remove From History
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Right column  -->
+  <div class="md:flex hidden flex-col w-1/4 h-full  items-center md:text-lg text-sm ">
+    <div class="block  w-full h-full mt-3 ">
+      <div class="flex text-center font-thin text-lg justify-center">Add more to your cart</div>
+      <div class="flex flex-col w-full p-5 md:text-lg sm:text-sm text-xs" *ngFor="let i of products.slice(0, 4)">
+        <app-card class=" shadow-sm " [item]="i"></app-card>
+      </div>
+    </div>
+  </div>
+
+
+</main>

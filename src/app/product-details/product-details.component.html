@@ -1,0 +1,13 @@
+<div *ngIf="selectedItem" class="product-details">
+  <h2 style="margin: auto;">{{ selectedItem.title }}</h2>
+  <img [src]="selectedItem.image" alt="Product Image" class="product-image" style="margin: auto;">
+  <p><strong>Price:</strong> ${{ selectedItem.price }}</p>
+  <p><strong>Description:</strong> {{ selectedItem.description }}</p>
+  <p><strong>Category:</strong> {{ selectedItem.category }}</p>
+  <p><strong>Rating:</strong> {{ selectedItem.rating.rate }} ({{ selectedItem.rating.count }} reviews)</p>
+  <button (click)="updateItemsInCart(selectedItem)"
+    class="rounded-lg w-48 bg-yellow-300 hover:bg-yellow-400 text-center p-2 my-4  hover:shadow-2xl ease-in-out duration-700 hover:text-orange-600">
+    Add to Cart
+  </button>
+</div>
+
